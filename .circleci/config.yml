@@ -4,6 +4,7 @@ jobs:
   test_a:
     docker:
       - image: cimg/base:current
+    resource_class: small
     steps:
       - checkout
       - run:
@@ -12,6 +13,7 @@ jobs:
   test_b:
     docker:
       - image: cimg/base:current
+    resource_class: small
     steps:
       - checkout
       - run:
@@ -20,6 +22,7 @@ jobs:
   deploy:
     docker:
       - image: cimg/base:current
+    resource_class: small
     steps:
       - checkout
       - run:
@@ -27,11 +30,8 @@ jobs:
           command: "echo deploying"
 
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  main-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  main-workflow:
     jobs:
       - test_a
       - test_b
