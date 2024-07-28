@@ -16,6 +16,11 @@ jobs:
     resource_class: small
     steps:
       - checkout
+      - run: |
+          if [ "$CIRCLE_BRANCH" = "test" ]; then
+            echo "no need to run B tests"
+            circleci-agent step halt
+          fi
       - run:
           name: "run B tests"
           command: "echo running B tests"
